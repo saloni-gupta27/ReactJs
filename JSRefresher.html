@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LearnJS</title>
+    <script>
+        let a = 34;
+         a = 34+9;
+        console.log(a);
+        
+        function greet(){
+            console.log("Hye");
+            
+        }
+        let obj = {
+            a: "Hello",
+            b: "Hi",
+            c: "Hye",                           // obj.c
+            func: function objFunc(number) {   //obj.func(45)
+                console.log("The number is " + number);
+                
+            }
+        }
+        document.addEventListener('click',function click(){
+            console.log("clicked");
+            //alert("clicked");
+            let conf = confirm("Are you sure?");
+            console.log(conf);
+            
+        })
+        const array = [22,34,78];
+        for (let index = 0; index < array.length; index++) {
+            const element = array[index];
+            console.log(element);
+            
+        }
+        array.forEach((element)=>{
+            console.log("This is from arr func : "+ element);
+            
+        })
+        function scope(num){
+            console.log("num is " +this);
+        }
+        scope();
+        let arrFuncScope = () => {
+            console.log("scope : " +this);  
+        }
+        arrFuncScope();
+        let objFunc = {
+            a: this,
+            objFuncVar : function number(){
+                console.log("scope for func: " + this);
+                
+            },
+            objVar : (num) => {
+                console.log("Obj scope: " + this);
+                
+            }
+        }
+        console.log(objFunc.a);
+        objFunc.objFuncVar();
+        objFunc.objVar();
+        setTimeout(()=>{
+            console.log("Timed Out");           
+        },3000);
+        console.log("Below callback");
+        
+    </script>
+</head>
+<body>
+    <h1>DataTypes</h1>
+    <p>Numbers</p>
+    <p>Objects</p>
+    <p>Boolean</p>
+    <p>Strings</p>
+    <p>Undefined</p>
+    <p>Null</p>
+</body>
+</html>
