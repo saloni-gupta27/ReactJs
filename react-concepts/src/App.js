@@ -1,9 +1,13 @@
 import { useState } from "react";
 import "./App.css";
-// import About from "./components/About";
+import About from "./components/About";
 import Form from "./components/Form";
 import Navbar from "./components/Navbar";
 import Alert from "./components/Alert";
+import {
+  BrowserRouter, Routes, Route 
+} from "react-router-dom";
+
 
 function App() {
   let [mode, setMode]=useState("Light");
@@ -25,7 +29,7 @@ function App() {
     setMode('Light');
     setColor("rgb(246 244 244);");
     document.body.style.backgroundColor="#fff";
-    showAlert("Light mode is enabled", "success");
+    showAlert("Light mode is enabled", "info");
     }
     else{
       setMode('Dark');
@@ -33,6 +37,13 @@ function App() {
       document.body.style.backgroundColor="rgb(20, 49, 116)";
     showAlert("Dark mode is enabled","dark");
     }
+    // setInterval(()=>{
+    //   document.title="TextUtils works";
+    // },1200)
+    // setInterval(()=>{
+    //   document.title="Install TextUtils";
+    // },1000)
+    
   }
 
   let toggleRed =() =>{
@@ -40,7 +51,7 @@ function App() {
       setMode('Light');
       setColor("#530500;");
       document.body.style.backgroundColor="#fff";
-      showAlert("Light mode is enabled", "success");
+      showAlert("Light mode is enabled", "info");
       }
       else{
         setMode('Red');
@@ -54,7 +65,7 @@ function App() {
       setMode('Light');
       setColor("rgb(246 244 244);");
       document.body.style.backgroundColor="#fff";
-      showAlert("Light mode is enabled", "success");
+      showAlert("Light mode is enabled", "info");
       }
       else{
         setMode('Green');
@@ -64,13 +75,18 @@ function App() {
       }
   }
   return (
-    <>
+    <BrowserRouter>
       <Navbar title="TextUtils" item1="Home" item2="About" mode={mode} toggleMode={toggleMode} toggleRed={toggleRed}  toggleGreen={toggleGreen} color={color}/>
       <Alert alert={alert}/>
-        <Form  heading="Enter the text here" mode={mode} alert={alert} showAlert={showAlert} color={color}/>
-        {/* <About/> */}
+      <Routes>
+      <Route path="/" element={<Form  heading="Enter the text here" mode={mode} alert={alert} showAlert={showAlert} color={color}/>}/>
     
-    </>
+        
+        <Route path="/about" element={<About mode={mode} color={color}/>} />
+      
+        </Routes>
+    
+    </BrowserRouter>
   );
 }
 

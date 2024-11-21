@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export default function About() {
+export default function About(props) {
   let [myStyle, setMyStyle] = useState({
     color: "white",
     backgroundColor: "#494949",
@@ -23,8 +23,8 @@ export default function About() {
     }
   }
   return (
-    <div>
-        <h1>About Us</h1>
+    <div className="container">
+        <h1  style={{ color: props.mode === "Light" ? "black" : "white" }}>About Us</h1>
       <div className="accordion" id="accordionExample">
         <div className="accordion-item" style={myStyle}>
           <h2 className="accordion-header">
@@ -118,7 +118,11 @@ export default function About() {
           </div>
         </div>
       </div>
-      <button className="btn btn-info my-3" onClick={toggleTheme}>{btnText}</button>
+      <button className="btn btn-info my-3" onClick={toggleTheme} style={{
+            backgroundColor: props.mode !== "Light" ? props.color : "",
+            borderColor: props.mode !== "Light" ? props.color : "",
+            color: props.mode !== "Light" ? 'white': 'black'
+          }}>{btnText}</button>
     </div>
   );
 }
