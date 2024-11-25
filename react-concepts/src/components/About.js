@@ -23,7 +23,7 @@ export default function About(props) {
     }
   }
   return (
-    <div className="container">
+    <div className="container my-3">
         <h1  style={{ color: props.mode === "Light" ? "black" : "white" }}>About Us</h1>
       <div className="accordion" id="accordionExample">
         <div className="accordion-item" style={myStyle}>
@@ -121,7 +121,7 @@ export default function About(props) {
       <button className="btn btn-info my-3" onClick={toggleTheme} style={{
             backgroundColor: props.mode !== "Light" ? props.color : "",
             borderColor: props.mode !== "Light" ? props.color : "",
-            color: props.mode !== "Light" ? 'white': 'black'
+            color: props.mode === "Light" ? 'black' : "white",
           }}>{btnText}</button>
     </div>
   );

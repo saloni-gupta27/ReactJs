@@ -3,6 +3,7 @@ import { useState } from "react";
 
 export default function Form(props) {
   let [text, setText] = useState("");
+  
 
   let handleChange = (event) => {
     setText(event.target.value);
@@ -32,9 +33,10 @@ export default function Form(props) {
     props.showAlert("Text cleared", "success");
   };
   let copyText = () => {
-    let newText = document.getElementById("myBox");
-    newText.select();
-    navigator.clipboard.writeText(newText.value);
+    // let newText = document.getElementById("myBox");
+    // newText.select();
+    navigator.clipboard.writeText(text);
+    window.getSelection().removeAllRanges();
     props.showAlert("Copied to clipboard", "success");
   };
 
@@ -65,46 +67,51 @@ export default function Form(props) {
             backgroundColor: props.mode !== "Light" ? props.color : "",
             borderColor: props.mode !== "Light" ? props.color : "",
           }}
+          disabled={text.length===0}
         >
           Convert to UpperCase
         </button>
         <button
-          className="btn btn-primary mx-2"
+          className="btn btn-primary mx-2  mb-1"
           onClick={handleLowerCaseConversion}
           style={{
             backgroundColor: props.mode !== "Light" ? props.color : "",
             borderColor: props.mode !== "Light" ? props.color : "",
           }}
+          disabled={text.length===0}
         >
           Convert to LowerCase
         </button>
         <button
-          className="btn btn-primary mx-2"
+          className="btn btn-primary mx-2  mb-1"
           onClick={handleRemoveSpaces}
           style={{
             backgroundColor: props.mode !== "Light" ? props.color : "",
             borderColor: props.mode !== "Light" ? props.color : "",
           }}
+          disabled={text.length===0}
         >
           Remove Spaces
         </button>
         <button
-          className="btn btn-primary mx-2"
+          className="btn btn-primary mx-2  mb-1"
           onClick={handleReverseText}
           style={{
             backgroundColor: props.mode !== "Light" ? props.color : "",
             borderColor: props.mode !== "Light" ? props.color : "",
           }}
+          disabled={text.length===0}
         >
           Reverse Text
         </button>
         <button
-          className="btn btn-primary mx-2"
+          className="btn btn-primary mx-2  mb-1"
           onClick={clearText}
           style={{
             backgroundColor: props.mode !== "Light" ? props.color : "",
             borderColor: props.mode !== "Light" ? props.color : "",
           }}
+          disabled={text.length===0}
         >
           Clear Text
         </button>
@@ -115,18 +122,19 @@ export default function Form(props) {
             backgroundColor: props.mode !== "Light" ? props.color : "",
             borderColor: props.mode !== "Light" ? props.color : "",
           }}
+          disabled={text.length===0}
         >
           Copy Text
         </button>
         <div className="container my-3">
           <h2>Your text summary</h2>
           <p>
-            {text.split(" ").length} words {text.length} characters.
+            {text.split(/\s+/).filter(el=>el.length>0).length} words {text.length} characters.
           </p>
-          <p>{0.008 * text.split(" ").length} minutes read.</p>
+          <p>{0.008 * text.split(" ").filter(el=>el.length>0).length} minutes read.</p>
           <h2>Preview</h2>
           <p>
-            {text.length <= 0 ? "Enter the text above to see preview" : text}
+            {text.length === 0 ? "Nothing to preview" : text}
           </p>
         </div>
       </div>
